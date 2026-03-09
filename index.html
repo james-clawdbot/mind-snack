@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Snack | Diogo Moratti</title>
+    <meta name="description" content="Publicações digitais que explodem sua mente. Casos científicos fascinantes sobre o poder da mente humana.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WSF57VH2');</script>
+    <!-- End Google Tag Manager -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --coral: #E63946;
+            --lime: #E9FF70;
+            --dark: #1a1a1a;
+            --gray: #666;
+            --light-gray: #f5f5f5;
+            --white: #fff;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .logo {
+            display: inline-block;
+            border: 3px solid var(--dark);
+            padding: 0.5rem 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .logo-text span {
+            font-weight: 400;
+        }
+        
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.5rem;
+            color: var(--coral);
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        /* Card */
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        
+        .card.locked {
+            opacity: 0.85;
+        }
+        
+        .card.locked:hover {
+            transform: none;
+        }
+        
+        /* Card Cover */
+        .card-cover {
+            position: relative;
+            aspect-ratio: 3/4;
+            background: var(--light-gray);
+            overflow: hidden;
+        }
+        
+        .card-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Locked Overlay */
+        .locked-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+        
+        .lock-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+        
+        .volume-label {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .release-date {
+            font-size: 0.9rem;
+            color: var(--lime);
+            font-weight: 500;
+        }
+        
+        /* Card Info */
+        .card-info {
+            padding: 1.25rem;
+        }
+        
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .card-subtitle {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-download {
+            background: var(--coral);
+            color: var(--white);
+        }
+        
+        .btn-download:hover {
+            background: #d32f3f;
+            transform: scale(1.02);
+        }
+        
+        .btn-locked {
+            background: var(--light-gray);
+            color: var(--gray);
+            cursor: not-allowed;
+        }
+        
+        /* Badge */
+        .badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--lime);
+            color: var(--dark);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem 1rem;
+            color: var(--gray);
+        }
+        
+        footer a {
+            color: var(--coral);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+        
+        /* Responsive */
+        @media (min-width: 768px) {
+            .container {
+                padding: 3rem 2rem;
+            }
+            
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .cards-grid {
+                gap: 2rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            
+            .card-cover {
+                aspect-ratio: 2/3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSF57VH2"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-text">MIND<span>snack</span></span>
+            </div>
+            <h1>Publicações que explodem sua mente</h1>
+            <p class="subtitle">Casos científicos fascinantes sobre o poder da mente humana. Uma coleção exclusiva de Diogo Moratti.</p>
+        </header>
+        
+        <main>
+            <div class="cards-grid">
+                <!-- Vol 1 - Liberado -->
+                <div class="card">
+                    <div class="card-cover">
+                        <img src="assets/vol1-cover.jpg" alt="Mind Snack Vol. 1 - Placebo">
+                        <span class="badge">Novo</span>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Vol. 1 — Placebo</h2>
+                        <p class="card-subtitle">10 casos científicos que provam que a mente pode curar o corpo</p>
+                        <a href="assets/vol1-placebo.pdf" download class="btn btn-download">
+                            ⬇ Download Grátis
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Vol 2 - Bloqueado -->
+                <div class="card locked">
+                    <div class="card-cover">
+                        <div class="locked-overlay">
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <span class="volume-label">Vol. 2</span>
+                            <span class="release-date">Libera em 11/03</span>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Vol. 2</h2>
+                        <p class="card-subtitle">Em breve...</p>
+                        <button class="btn btn-locked" disabled>
+                            🔒 Aguarde a liberação
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Vol 3 - Bloqueado -->
+                <div class="card locked">
+                    <div class="card-cover">
+                        <div class="locked-overlay">
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <span class="volume-label">Vol. 3</span>
+                            <span class="release-date">Libera em 13/03</span>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Vol. 3</h2>
+                        <p class="card-subtitle">Em breve...</p>
+                        <button class="btn btn-locked" disabled>
+                            🔒 Aguarde a liberação
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Vol 4 - Bloqueado -->
+                <div class="card locked">
+                    <div class="card-cover">
+                        <div class="locked-overlay">
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <span class="volume-label">Vol. 4</span>
+                            <span class="release-date">Libera em 16/03</span>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Vol. 4</h2>
+                        <p class="card-subtitle">Em breve...</p>
+                        <button class="btn btn-locked" disabled>
+                            🔒 Aguarde a liberação
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Vol 5 - Bloqueado -->
+                <div class="card locked">
+                    <div class="card-cover">
+                        <div class="locked-overlay">
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <span class="volume-label">Vol. 5</span>
+                            <span class="release-date">Libera em 18/03</span>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Vol. 5</h2>
+                        <p class="card-subtitle">Em breve...</p>
+                        <button class="btn btn-locked" disabled>
+                            🔒 Aguarde a liberação
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Uma coleção de <a href="https://instagram.com/diogomoratti" target="_blank">@diogomoratti</a></p>
+            <a href="https://instagram.com/diogomoratti" target="_blank" class="social-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                Siga para mais conteúdo
+            </a>
+        </footer>
+    </div>
+</body>
+</html>
